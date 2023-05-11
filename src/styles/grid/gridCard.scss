@@ -1,6 +1,6 @@
 .grid-card-container {
+  position: relative;
   .grid-card-header {
-    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -22,7 +22,8 @@
     }
     svg {
       position: absolute;
-      right: 0;
+      top: 24px;
+      right: 14px;
     }
   }
 }
