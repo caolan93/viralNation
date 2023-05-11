@@ -1,4 +1,7 @@
-import { Box, Grid } from "@mui/material";
+import { Hidden, Button, Grid, TextField, Typography } from "@mui/material";
+import { PersonAdd } from "@mui/icons-material";
+import { ViewWeek } from "@mui/icons-material";
+import { List } from "@mui/icons-material";
 
 import GridCard from "../components/grid/Card";
 
@@ -82,12 +85,40 @@ const HomePage = () => {
 
   return (
     <div className="grid-container">
+      <Grid xs={12} lg={9} container>
+        <Grid className="input-container" item xs={12}>
+          <Grid item xs={12}>
+            <TextField fullWidth />
+          </Grid>
+          <Grid className="buttons-container" item xs={12} lg={3}>
+            <Button
+              color="primary"
+              variant="outlined"
+              startIcon={<PersonAdd sx={{ height: "16px", width: "16px" }} />}
+            >
+              <Typography
+                sx={{ textTransform: "none", whiteSpace: "pre" }}
+                variant="body2"
+              >
+                Create Profile
+              </Typography>
+            </Button>
+            <Hidden smDown={true}>
+              <Button
+                className="layout-switch-btn"
+                variant="outlined"
+                startIcon={<ViewWeek sx={{ height: "20px", width: "20px" }} />}
+                endIcon={<List sx={{ height: "25px", width: "25px" }} />}
+              />
+            </Hidden>
+          </Grid>
+        </Grid>
+      </Grid>
       <Grid
-        spacing={{ xs: 0, lg: 3 }}
-        columnSpacing={{ sm: 3 }}
-        rowGap={{ xs: 3, lg: 0 }}
+        spacing={{ xs: 0, sm: 3 }}
+        rowSpacing={{ xs: 3 }}
         xs={12}
-        lg={10}
+        lg={9}
         container
       >
         {dataArr?.map((value, index: number) => (

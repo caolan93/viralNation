@@ -18,7 +18,6 @@ const GridCard = ({ content }: { content: DataType }) => {
         padding: "0",
         width: "100%",
         height: "100%",
-        maxWidth: "342px",
       }}
     >
       <CardContent sx={{ padding: "24px" }}>

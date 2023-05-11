@@ -2,8 +2,39 @@
   margin-top: 40px;
   margin-bottom: 40px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 24px;
   flex: 1 1 100%;
+
+  .input-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    input {
+      height: 40px;
+      padding: 0;
+      box-sizing: "border-box";
+    }
+    .buttons-container {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 16px;
+    }
+  }
+
+  .layout-switch-btn {
+    padding: 0;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    span {
+      margin: 0;
+      svg {
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -12,5 +43,18 @@
     margin-bottom: 24px;
     padding-left: 24px;
     padding-right: 24px;
+    .input-container {
+      flex-wrap: wrap;
+      input {
+        height: 40px;
+        padding: 0;
+        box-sizing: "border-box";
+      }
+      .buttons-container {
+        justify-content: flex-end;
+        button {
+        }
+      }
+    }
   }
 }
