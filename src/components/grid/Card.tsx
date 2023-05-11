@@ -1,6 +1,9 @@
 import { Card, Typography, CardContent, Avatar } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
+// Assets
+import verified from "../../assets/verified.png";
+
 // Styling
 import "../../styles/grid/gridCard.scss";
 
@@ -15,6 +18,7 @@ const GridCard = ({ content }: { content: DataType }) => {
         padding: "0",
         width: "100%",
         height: "100%",
+        maxWidth: "342px",
       }}
     >
       <CardContent sx={{ padding: "24px" }}>
@@ -24,10 +28,18 @@ const GridCard = ({ content }: { content: DataType }) => {
             alt={`Image of ${content?.name}`}
             src={content?.image}
           />
-          <div className="grid-card-text-info">
-            <Typography variant="body1" fontWeight={500} color="#212121">
-              {content?.name}
-            </Typography>
+          <div className="grid-card-information">
+            <div className="grid-user-info">
+              <Typography variant="body1" fontWeight={500} color="#212121">
+                {content?.name}
+              </Typography>
+              <img
+                height="16px"
+                width="16px"
+                src={verified}
+                alt="An icon for verified image"
+              />
+            </div>
             <Typography variant="body2" fontWeight={400} color="#2B2B2B">
               {content?.email}
             </Typography>

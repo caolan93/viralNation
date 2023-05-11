@@ -7,13 +7,22 @@
     align-items: center;
     gap: 16px;
     margin-bottom: 10px;
-    .grid-card-text-info {
+    .grid-card-information {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      align-items: flex-start;
+
+      .grid-user-info {
+        display: flex;
+        align-items: center;
+        img {
+          margin-left: 4px;
+        }
+      }
     }
     svg {
-      margin-left: auto;
+      position: absolute;
+      right: 0;
     }
   }
 }
