@@ -1,0 +1,19 @@
+.grid-card-container {
+  .grid-card-header {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+    .grid-card-text-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    svg {
+      margin-left: auto;
+    }
+  }
+}
