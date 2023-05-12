@@ -3,11 +3,11 @@ import { PersonAdd } from "@mui/icons-material";
 import { ViewWeek } from "@mui/icons-material";
 import { List } from "@mui/icons-material";
 
-import GridCard from "../components/grid/Card";
+import GridCard from "./Card";
 
-import "../styles/grid/gridPage.scss";
+import "../../styles/grid/gridPage.scss";
 
-const HomePage = () => {
+const GridPage = () => {
   const dataArr = [
     {
       id: 1,
@@ -141,4 +141,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default GridPage;
