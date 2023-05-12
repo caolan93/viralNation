@@ -8,7 +8,6 @@ import verified from "../../assets/verified.png";
 import "../../styles/grid/gridCard.scss";
 
 const GridCard = ({ content }: { content: DataType }) => {
-  console.log("CONTENT", content);
   return (
     <Card
       className="grid-card-container"
@@ -32,12 +31,14 @@ const GridCard = ({ content }: { content: DataType }) => {
               <Typography variant="body1" fontWeight={500} color="#212121">
                 {content?.name}
               </Typography>
-              <img
-                height="16px"
-                width="16px"
-                src={verified}
-                alt="An icon for verified image"
-              />
+              {content?.is_verified && (
+                <img
+                  height="16px"
+                  width="16px"
+                  src={verified}
+                  alt="An icon for verified image"
+                />
+              )}
             </div>
             <Typography variant="body2" fontWeight={400} color="#2B2B2B">
               {content?.email}
