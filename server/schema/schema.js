@@ -6,6 +6,7 @@ const {
   GraphQLString,
   GraphQLSchema,
   GraphQLBoolean,
+  GraphQLList,
 } = require("graphql");
 
 const UserType = new GraphQLObjectType({
@@ -24,6 +25,12 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    users: {
+      type: new GraphQLList(UserType),
+      resolve(parent, args) {
+        return users;
+      },
+    },
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
