@@ -1,5 +1,8 @@
 const { users } = require("../sampleData");
 
+// Mongoose Model
+const User = require("../models/User");
+
 const {
   GraphQLObjectType,
   GraphQLID,
@@ -28,14 +31,14 @@ const RootQuery = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parent, args) {
-        return users;
+        return User.find({});
       },
     },
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return users.find((user) => user.id == args.id);
+        return User.findById(args.id);
       },
     },
   },
