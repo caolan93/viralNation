@@ -133,7 +133,7 @@ const GridCard = ({ content, ...props }: Props) => {
           </Typography>
         </div>
       </CardContent>
-      <Modal isOpen={isOpen} handleClose={handleClose} />
+      <Modal id={content?.id} isOpen={isOpen} handleClose={handleClose} />
     </Card>
   );
 };

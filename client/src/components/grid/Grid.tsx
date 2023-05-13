@@ -7,7 +7,7 @@ import { ViewWeek } from "@mui/icons-material";
 import { List } from "@mui/icons-material";
 // import { data } from "../../assets/dataArr";
 import { useQuery } from "@apollo/client";
-import { GET_USERS } from "../../graphQL/schemas";
+import { GET_USERS } from "../../graphQL/queries";
 
 // Components
 import GridCard from "./gridCard/Card";

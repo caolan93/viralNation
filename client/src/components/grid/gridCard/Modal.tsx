@@ -1,32 +1,22 @@
-import { useState } from "react";
+import Swal from "sweetalert2";
 import { Close } from "@mui/icons-material";
-import {
-  Modal,
-  Typography,
-  Box,
-  Button,
-  Divider,
-  Switch,
-  InputLabel,
-  OutlinedInput,
-  FormControlLabel,
-} from "@mui/material";
+import { Modal, Typography, Box, Button, Divider } from "@mui/material";
+
+// GraphQL API Call
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_USER } from "../../../graphQL/mutations";
+import { GET_USERS } from "../../../graphQL/queries";
 
 type Props = {
   isOpen: boolean;
+  id: string;
   handleClose: () => void;
 };
 
-interface FormValues {
-  imageLink: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  description: string;
-  is_verified: boolean;
-}
+const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
+  const [deleteUser] = useMutation(DELETE_USER);
+  // const { loading, error, data } = useQuery(GET_USERS);
 
-const ModalComponent = ({ isOpen, handleClose }: Props) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -38,19 +28,27 @@ const ModalComponent = ({ isOpen, handleClose }: Props) => {
     boxShadow: 24,
   };
 
-  const labelStyling = {
-    fontFamily: "Roboto",
-    fontSize: "12px",
-    fontWeight: "400",
-    lineHeight: "16px",
-    letterSpacing: "0.4000000059604645px",
-    textAlign: "left",
-    marginBottom: "4px",
-    display: "contents",
-  };
-
-  const handleExit = () => {
-    handleClose();
+  const handleDeleteUser = async (id: string) => {
+    try {
+      handleClose();
+      await deleteUser({
+        variables: {
+          id: id,
+        },
+      });
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "User deleted successfully!",
+      });
+    } catch (error) {
+      handleClose();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error deleting this user!",
+      });
+    }
   };
 
   return (
@@ -76,7 +74,7 @@ const ModalComponent = ({ isOpen, handleClose }: Props) => {
               padding: 0,
               justifyContent: "flex-end",
             }}
-            onClick={handleExit}
+            onClick={handleClose}
           >
             <Close />
           </Button>
@@ -93,10 +91,14 @@ const ModalComponent = ({ isOpen, handleClose }: Props) => {
             justifyContent: "center",
           }}
         >
-          <Button onClick={handleExit} variant="contained" color="primary">
+          <Button onClick={handleClose} variant="contained" color="primary">
             <Typography>Cancel</Typography>
           </Button>
-          <Button variant="contained" color="error">
+          <Button
+            onClick={() => handleDeleteUser(id)}
+            variant="contained"
+            color="error"
+          >
             <Typography>Delete</Typography>
           </Button>
         </Box>

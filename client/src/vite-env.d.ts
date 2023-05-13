@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 type DataType = {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -11,11 +11,11 @@ type DataType = {
 };
 
 type Profile = {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
   is_verified: boolean;
-  image_url: string;
+  image: string;
   description: string;
 };
