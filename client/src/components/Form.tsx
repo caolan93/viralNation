@@ -12,6 +12,8 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
+import "../styles/components/form.scss";
+
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
@@ -36,16 +38,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
     is_verified: false,
   });
 
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 500,
-    height: "auto",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-  };
+  const style = {};
 
   const labelStyling = {
     fontFamily: "Roboto",
@@ -92,7 +85,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box className="modal-container">
         <form onSubmit={handleSubmit}>
           <Box
             sx={{
