@@ -1,24 +1,28 @@
+import { useState } from "react";
+
+// Material UI Components
 import { Hidden, Button, Grid, TextField, Typography } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { ViewWeek } from "@mui/icons-material";
 import { List } from "@mui/icons-material";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_PROFILES } from "../../graphQL/schemas";
+import { data } from "../../assets/dataArr";
 
-// import GridCard from "./Card";
+// Components
+import GridCard from "./Card";
+import Modal from "../Modal";
 
+// Styling
 import "../../styles/grid/gridPage.scss";
 
 const GridPage = () => {
-  const { loading, error, data } = useQuery(GET_ALL_PROFILES);
+  const [isOpen, setIsOpen] = useState(false);
 
-  if (loading) {
-    return console.log("loading still");
-  } else if (error) {
-    return console.log("error still");
-  } else {
-    return console.log("Data", data);
-  }
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div className="grid-container">
@@ -29,6 +33,7 @@ const GridPage = () => {
           </Grid>
           <Grid className="buttons-container" item xs={12} lg={3}>
             <Button
+              onClick={handleOpen}
               color="primary"
               variant="outlined"
               startIcon={<PersonAdd sx={{ height: "16px", width: "16px" }} />}
@@ -58,7 +63,7 @@ const GridPage = () => {
         lg={9}
         container
       >
-        {/* {data?.map((value, index: number) => (
+        {data?.map((value, index: number) => (
           <Grid
             sx={{
               display: "flex",
@@ -72,8 +77,10 @@ const GridPage = () => {
           >
             <GridCard content={value} />
           </Grid>
-        ))} */}
+        ))}
       </Grid>
+
+      <Modal isOpen={isOpen} handleClose={handleClose} />
     </div>
   );
 };
