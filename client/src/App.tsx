@@ -10,7 +10,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = new HttpLink({
-  uri: "https:localhost/5000",
+  uri: "http://localhost:5000/",
 });
 
 const authLink = setContext((_, { headers }) => {
