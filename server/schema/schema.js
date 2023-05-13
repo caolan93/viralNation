@@ -62,7 +62,7 @@ const mutation = new GraphQLObjectType({
         is_verified: { type: GraphQLNonNull(GraphQLBoolean) },
       },
       resolve: async (parent, args) => {
-        let user = await User.find({ email: args.email });
+        let user = await User.findOne({ email: args.email });
 
         if (user) {
           throw `A user with the email ${args.email} already exists. Please use another email.`;

@@ -14,15 +14,21 @@ import {
 
 import "../styles/components/form.scss";
 
+// GRAPHQL API
+import { ADD_USER } from "../graphQL/mutations";
+import { useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
+import { GET_USERS } from "../graphQL/queries";
+
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
 };
 
 interface FormValues {
-  imageLink: string;
-  firstName: string;
-  lastName: string;
+  image: string;
+  first_name: string;
+  last_name: string;
   email: string;
   description: string;
   is_verified: boolean;
@@ -30,15 +36,13 @@ interface FormValues {
 
 const Form = ({ isOpen, handleClose }: Props) => {
   const [formValues, setFormValues] = useState<FormValues>({
-    imageLink: "",
-    firstName: "",
-    lastName: "",
+    image: "",
+    first_name: "",
+    last_name: "",
     email: "",
     description: "",
     is_verified: false,
   });
-
-  const style = {};
 
   const labelStyling = {
     fontFamily: "Roboto",
@@ -60,18 +64,47 @@ const Form = ({ isOpen, handleClose }: Props) => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(
-      `Name: ${formValues.firstName}, Email: ${formValues.email}, Name: ${formValues.lastName}, ImageLink: ${formValues.imageLink}, Desc: ${formValues.description}, Is Verified: ${formValues.is_verified}`
-    );
+  const [addUser] = useMutation(ADD_USER, {
+    variables: { ...formValues },
+    update(cache, { data: { addUser } }) {
+      // @ts-ignore
+      const { users } = cache.readQuery({ query: GET_USERS });
+      cache.writeQuery({
+        query: GET_USERS,
+        data: { users: [...users, addUser] },
+      });
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      await addUser({
+        variables: {
+          ...formValues,
+        },
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "User created successfully!",
+      });
+      handleExit();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error",
+      });
+    }
   };
 
   const handleExit = () => {
     setFormValues({
-      imageLink: "",
-      firstName: "",
-      lastName: "",
+      image: "",
+      first_name: "",
+      last_name: "",
       email: "",
       description: "",
       is_verified: false,
@@ -122,14 +155,14 @@ const Form = ({ isOpen, handleClose }: Props) => {
             }}
           >
             <div style={{ width: "100%" }}>
-              <InputLabel sx={labelStyling} htmlFor="imageLink">
+              <InputLabel sx={labelStyling} htmlFor="image">
                 Image Link
               </InputLabel>
               <OutlinedInput
                 style={{ width: "100%" }}
-                id="imageLink"
-                name="imageLink"
-                value={formValues.imageLink}
+                id="image"
+                name="image"
+                value={formValues.image}
                 onChange={handleFormChange}
                 required
               />
@@ -143,34 +176,34 @@ const Form = ({ isOpen, handleClose }: Props) => {
               }}
             >
               <div style={{ width: "100%" }}>
-                <InputLabel sx={labelStyling} htmlFor="firstName">
+                <InputLabel sx={labelStyling} htmlFor="first_name">
                   First Name
                 </InputLabel>
                 <OutlinedInput
                   style={{ width: "100%" }}
-                  id="firstName"
-                  name="firstName"
-                  value={formValues.firstName}
+                  id="first_name"
+                  name="first_name"
+                  value={formValues.first_name}
                   onChange={handleFormChange}
                   required
                 />
               </div>
               <div style={{ width: "100%" }}>
-                <InputLabel sx={labelStyling} htmlFor="lastName">
+                <InputLabel sx={labelStyling} htmlFor="last_name">
                   Last Name
                 </InputLabel>
                 <OutlinedInput
                   style={{ width: "100%" }}
-                  id="lastName"
-                  value={formValues.lastName}
-                  name="lastName"
+                  id="last_name"
+                  value={formValues.last_name}
+                  name="last_name"
                   onChange={handleFormChange}
                   required
                 />
               </div>
             </Box>
             <div style={{ width: "100%" }}>
-              <InputLabel sx={labelStyling} htmlFor="emai">
+              <InputLabel sx={labelStyling} htmlFor="email">
                 Email
               </InputLabel>
 
