@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Close } from "@mui/icons-material";
 import {
   Modal,
@@ -20,28 +20,30 @@ import { useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 import { GET_USERS } from "../graphQL/queries";
 
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store";
+import { clearForm } from "../redux/form";
+
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
 };
 
-interface FormValues {
-  image: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  description: string;
-  is_verified: boolean;
-}
-
 const Form = ({ isOpen, handleClose }: Props) => {
+  const dispatch = useDispatch();
+  const initialValues = useSelector(
+    (state: RootState) => state?.form?.formValues
+  );
+
   const [formValues, setFormValues] = useState<FormValues>({
-    image: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    description: "",
-    is_verified: false,
+    id: initialValues?.id || "",
+    image: initialValues?.image || "",
+    first_name: initialValues?.first_name || "",
+    last_name: initialValues?.last_name || "",
+    email: initialValues?.email || "",
+    description: initialValues?.description || "",
+    is_verified: initialValues?.is_verified || false,
   });
 
   const labelStyling = {
@@ -109,6 +111,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
       description: "",
       is_verified: false,
     });
+    dispatch(clearForm());
     handleClose();
   };
 
@@ -162,7 +165,9 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="image"
                 name="image"
-                value={formValues.image}
+                value={
+                  initialValues.image ? initialValues.image : formValues.image
+                }
                 onChange={handleFormChange}
                 required
               />
@@ -183,7 +188,11 @@ const Form = ({ isOpen, handleClose }: Props) => {
                   style={{ width: "100%" }}
                   id="first_name"
                   name="first_name"
-                  value={formValues.first_name}
+                  value={
+                    initialValues.first_name
+                      ? initialValues.first_name
+                      : formValues.first_name
+                  }
                   onChange={handleFormChange}
                   required
                 />
@@ -195,7 +204,11 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 <OutlinedInput
                   style={{ width: "100%" }}
                   id="last_name"
-                  value={formValues.last_name}
+                  value={
+                    initialValues.last_name
+                      ? initialValues.last_name
+                      : formValues.last_name
+                  }
                   name="last_name"
                   onChange={handleFormChange}
                   required
@@ -211,7 +224,9 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="email"
                 name="email"
-                value={formValues.email}
+                value={
+                  initialValues.email ? initialValues.email : formValues.email
+                }
                 onChange={handleFormChange}
                 required
               />
@@ -226,7 +241,11 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="description"
                 name="description"
-                value={formValues.description}
+                value={
+                  initialValues.description
+                    ? initialValues.description
+                    : formValues.description
+                }
                 onChange={handleFormChange}
                 required
               />
@@ -250,7 +269,11 @@ const Form = ({ isOpen, handleClose }: Props) => {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={formValues.is_verified}
+                    checked={
+                      initialValues.is_verified
+                        ? initialValues.is_verified
+                        : formValues.is_verified
+                    }
                     onChange={handleFormChange}
                     name="is_verified"
                   />

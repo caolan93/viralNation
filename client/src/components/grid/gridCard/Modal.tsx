@@ -3,7 +3,7 @@ import { Close } from "@mui/icons-material";
 import { Modal, Typography, Box, Button, Divider } from "@mui/material";
 
 // GraphQL API Call
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { DELETE_USER } from "../../../graphQL/mutations";
 import { GET_USERS } from "../../../graphQL/queries";
 
@@ -14,9 +14,9 @@ type Props = {
 };
 
 const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
-  const [deleteUser] = useMutation(DELETE_USER);
-  // const { loading, error, data } = useQuery(GET_USERS);
-
+  const [deleteUser] = useMutation(DELETE_USER, {
+    refetchQueries: [{ query: GET_USERS }],
+  });
   const style = {
     position: "absolute",
     top: "50%",

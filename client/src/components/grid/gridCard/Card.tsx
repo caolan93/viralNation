@@ -14,6 +14,10 @@ import { MoreVert } from "@mui/icons-material";
 // Components
 import Modal from "./Modal";
 
+// Redux
+import { setFormValues } from "../../../redux/form";
+import { useDispatch } from "react-redux";
+
 // Assets
 import verified from "../../../assets/verified.png";
 
@@ -21,11 +25,12 @@ import verified from "../../../assets/verified.png";
 import "../../../styles/components/grid/gridCard/gridCard.scss";
 
 type Props = {
-  content: DataType;
+  content: Profile;
   isFormOpen: () => void;
 };
 
 const GridCard = ({ content, ...props }: Props) => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -41,6 +46,11 @@ const GridCard = ({ content, ...props }: Props) => {
   };
   const handleDropdownOpen = () => {
     setIsDropdownOpen(true);
+  };
+
+  const handleForm = () => {
+    dispatch(setFormValues(content));
+    props.isFormOpen();
   };
 
   const buttonStyle = {
@@ -112,7 +122,7 @@ const GridCard = ({ content, ...props }: Props) => {
                   boxShadow: 2,
                 }}
               >
-                <Button onClick={props.isFormOpen} sx={buttonStyle}>
+                <Button onClick={handleForm} sx={buttonStyle}>
                   <Typography sx={{ whiteSpace: "pre" }}>
                     Edit profile
                   </Typography>
