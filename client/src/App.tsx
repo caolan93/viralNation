@@ -9,20 +9,20 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-const httpLink = new HttpLink({
-  uri: "http://localhost:5000/",
-});
+// const httpLink = new HttpLink({
+//   uri: "http://localhost:5000/graphiql",
+// });
 
-const authLink = setContext((_, { headers }) => {
-  return {
-    headers: {
-      ...headers,
-    },
-  };
-});
+// const authLink = setContext((_, { headers }) => {
+//   return {
+//     headers: {
+//       ...headers,
+//     },
+//   };
+// });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  uri: "http://localhost:5000/graphiql",
   cache: new InMemoryCache(),
 });
 
