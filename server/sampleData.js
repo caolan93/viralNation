@@ -1,8 +1,8 @@
-export const data = [
+// Projects
+const users = [
   {
     id: 1,
-    first_name: "John Doe",
-    last_name: "John Doe",
+    name: "John Doe",
     email: "johndoe@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/1.jpg",
@@ -10,8 +10,7 @@ export const data = [
   },
   {
     id: 2,
-    first_name: "Jane Smith",
-    last_name: "Jane Smith",
+    name: "Jane Smith",
     email: "janesmith@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/women/2.jpg",
@@ -19,8 +18,7 @@ export const data = [
   },
   {
     id: 3,
-    first_name: "Bob Johnson",
-    last_name: "Bob Johnson",
+    name: "Bob Johnson",
     email: "bobjohnson@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/3.jpg",
@@ -29,8 +27,7 @@ export const data = [
   },
   {
     id: 4,
-    first_name: "Emily",
-    last_name: "Rodriguez",
+    name: "Emily Rodriguez",
     email: "emilyrodriguez@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/4.jpg",
@@ -39,8 +36,7 @@ export const data = [
   },
   {
     id: 5,
-    first_name: "David",
-    last_name: "Lee",
+    name: "David Lee",
     email: "davidlee@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/men/5.jpg",
@@ -49,8 +45,7 @@ export const data = [
   },
   {
     id: 6,
-    first_name: "Sarah",
-    last_name: "Kim",
+    name: "Sarah Kim",
     email: "sarahkim@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/6.jpg",
@@ -59,8 +54,7 @@ export const data = [
   },
   {
     id: 7,
-    first_name: "Alex",
-    last_name: "Wong",
+    name: "Alex Wong",
     email: "alexwong@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/men/7.jpg",
@@ -69,8 +63,7 @@ export const data = [
   },
   {
     id: 8,
-    first_name: "Karen",
-    last_name: "Chen",
+    name: "Karen Chen",
     email: "karenchen@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/8.jpg",
@@ -78,8 +71,7 @@ export const data = [
   },
   {
     id: 9,
-    first_name: "Michael",
-    last_name: "Kim",
+    name: "Michael Kim",
     email: "michaelkim@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/9.jpg",
@@ -88,11 +80,12 @@ export const data = [
   },
   {
     id: 10,
-    first_name: "Jennifer",
-    last_name: "Lee",
+    name: "Jennifer Lee",
     email: "jenniferlee@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/women/10.jpg",
     description: "Software engineer with a passion for music and photography.",
   },
 ];
+
+module.exports = { users };
