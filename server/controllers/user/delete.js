@@ -3,9 +3,7 @@ const User = require("../../models/User");
 const createUser = async (req, res) => {
   try {
     // Searching to see if a users email already exists
-    let user = User.findByIdAndDelete(req.params.id);
-
-    await user.delete();
+    let user = await User.findByIdAndDelete(req.params.id);
 
     return res.send({
       message: "User deleted successfully.",
