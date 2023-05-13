@@ -31,8 +31,17 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     users: {
       type: new GraphQLList(UserType),
+      args: {
+        id: { type: GraphQLID },
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        image: { type: GraphQLString },
+        description: { type: GraphQLString },
+        is_verified: { type: GraphQLBoolean },
+      },
       resolve(parent, args) {
-        return User.find({});
+        return User.find(args);
       },
     },
     user: {
