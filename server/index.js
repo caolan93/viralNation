@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const schema = require("./schema/schema");
 const { graphqlHTTP } = require("express-graphql");
+const connectDB = require("./config/db");
 
 dotenv.config();
 
@@ -18,4 +19,8 @@ app.use(
   })
 );
 
+// Connect to MongoAtlas
+connectDB();
+
+// Listen on PORT
 app.listen(PORT, console.log(`Server running on port ${PORT}`));

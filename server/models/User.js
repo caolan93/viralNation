@@ -23,6 +23,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", UserSchema);
-
-exports.User = Driver;
+module.exports = mongoose.model("User", UserSchema);
