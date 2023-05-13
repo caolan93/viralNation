@@ -10,6 +10,7 @@ const {
   GraphQLSchema,
   GraphQLBoolean,
   GraphQLList,
+  GraphQLNonNull,
 } = require("graphql");
 
 const UserType = new GraphQLObjectType({
@@ -44,6 +45,38 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+// Mutations
+
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addUser: {
+      type: UserType,
+      args: {
+        first_name: { type: GraphQLNonNull(GraphQLString) },
+        last_name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        image: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        is_verified: { type: GraphQLNonNull(GraphQLBoolean) },
+      },
+      resolve(parent, args) {
+        const user = new User({
+          first_name: args.first_name,
+          last_name: args.last_name,
+          email: args.email,
+          description: args.description,
+          is_verified: args.is_verified,
+          image: args.image,
+        });
+
+        return user.save();
+      },
+    },
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });
