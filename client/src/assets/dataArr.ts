@@ -19,8 +19,8 @@ export const data = [
   },
   {
     id: 3,
-    first_name: "Bob Johnson",
-    last_name: "Bob Johnson",
+    first_name: "Bob",
+    last_name: "Johnson",
     email: "bobjohnson@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/3.jpg",
