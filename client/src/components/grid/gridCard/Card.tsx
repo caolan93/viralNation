@@ -1,7 +1,14 @@
 import { useState } from "react";
 
 // Material UI Components
-import { Card, Typography, CardContent, Avatar, Button } from "@mui/material";
+import {
+  Card,
+  Typography,
+  CardContent,
+  Avatar,
+  Button,
+  Box,
+} from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
 // Components
@@ -11,16 +18,38 @@ import Modal from "./Modal";
 import verified from "../../../assets/verified.png";
 
 // Styling
-import "../../../styles/grid/gridCard.scss";
+import "../../../styles/components/grid/gridCard/gridCard.scss";
 
-const GridCard = ({ content }: { content: DataType }) => {
+type Props = {
+  content: DataType;
+  isFormOpen: () => void;
+};
+
+const GridCard = ({ content, ...props }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
   };
   const handleOpen = () => {
     setIsOpen(true);
+  };
+
+  const handleDropdownClose = () => {
+    setIsDropdownOpen(false);
+  };
+  const handleDropdownOpen = () => {
+    setIsDropdownOpen(true);
+  };
+
+  const buttonStyle = {
+    textTransform: "none",
+    color: "#2B2B2B",
+    p: 2,
+    "&:hover": {
+      backgroundColor: "#f3f3f3",
+    },
   };
 
   return (
@@ -60,7 +89,7 @@ const GridCard = ({ content }: { content: DataType }) => {
             </Typography>
           </div>
           <Button
-            onClick={handleOpen}
+            onClick={handleDropdownOpen}
             sx={{
               display: "flex",
               position: "absolute",
@@ -70,6 +99,31 @@ const GridCard = ({ content }: { content: DataType }) => {
               color: "#9E9E9E",
             }}
           >
+            {isDropdownOpen && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "absolute",
+                  background: "#FFF",
+                  top: "0",
+                  right: "0",
+                  color: "#9E9E9E",
+                  boxShadow: 2,
+                }}
+              >
+                <Button onClick={props.isFormOpen} sx={buttonStyle}>
+                  <Typography sx={{ whiteSpace: "pre" }}>
+                    Edit profile
+                  </Typography>
+                </Button>
+                <Button onClick={handleOpen} sx={buttonStyle}>
+                  <Typography sx={{ whiteSpace: "pre" }}>
+                    Remove Profile
+                  </Typography>
+                </Button>
+              </Box>
+            )}
             <MoreVert />
           </Button>
         </div>

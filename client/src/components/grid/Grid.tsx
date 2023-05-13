@@ -14,7 +14,7 @@ import GridCard from "./gridCard/Card";
 import Form from "../Form";
 
 // Styling
-import "../../styles/grid/gridPage.scss";
+import "../../styles/components/grid/grid.scss";
 
 const GridPage = () => {
   // const { loading, error, data } = useQuery(GET_ALL_PROFILES);
@@ -86,7 +86,7 @@ const GridPage = () => {
                 lg={3}
                 item
               >
-                <GridCard content={value} />
+                <GridCard content={value} isFormOpen={handleOpen} />
               </Grid>
             ))}
           </Grid>
