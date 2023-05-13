@@ -50,6 +50,7 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    // Adding a user to MongoDB
     addUser: {
       type: UserType,
       args: {
@@ -60,8 +61,14 @@ const mutation = new GraphQLObjectType({
         description: { type: GraphQLNonNull(GraphQLString) },
         is_verified: { type: GraphQLNonNull(GraphQLBoolean) },
       },
-      resolve(parent, args) {
-        const user = new User({
+      resolve: async (parent, args) => {
+        let user = await User.find({ email: args.email });
+
+        if (user) {
+          throw `A user with the email ${args.email} already exists. Please use another email.`;
+        }
+
+        user = new User({
           first_name: args.first_name,
           last_name: args.last_name,
           email: args.email,
@@ -71,6 +78,45 @@ const mutation = new GraphQLObjectType({
         });
 
         return user.save();
+      },
+    },
+    // Updating a user from MongoDB
+    updateUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLID },
+        first_name: { type: GraphQLNonNull(GraphQLString) },
+        last_name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        image: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        is_verified: { type: GraphQLNonNull(GraphQLBoolean) },
+      },
+      resolve(parent, args) {
+        return User.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              first_name: args.first_name,
+              last_name: args.last_name,
+              email: args.email,
+              description: args.description,
+              is_verified: args.is_verified,
+              image: args.image,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+    // Deleting a user from MongoDB
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return User.findByIdAndDelete(args.id);
       },
     },
   },
