@@ -10,8 +10,8 @@ import { data } from "../../assets/dataArr";
 // import { GET_ALL_PROFILES } from "../../graphQL/schemas";
 
 // Components
-import GridCard from "./Card";
-import Modal from "../Modal";
+import GridCard from "./gridCard/Card";
+import Form from "../Form";
 
 // Styling
 import "../../styles/grid/gridPage.scss";
@@ -92,7 +92,7 @@ const GridPage = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Modal isOpen={isOpen} handleClose={handleClose} />
+      <Form isOpen={isOpen} handleClose={handleClose} />
     </div>
   );
 };

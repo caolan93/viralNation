@@ -1,13 +1,28 @@
-import { Card, Typography, CardContent, Avatar } from "@mui/material";
+import { useState } from "react";
+
+// Material UI Components
+import { Card, Typography, CardContent, Avatar, Button } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
+// Components
+import Modal from "./Modal";
+
 // Assets
-import verified from "../../assets/verified.png";
+import verified from "../../../assets/verified.png";
 
 // Styling
-import "../../styles/grid/gridCard.scss";
+import "../../../styles/grid/gridCard.scss";
 
 const GridCard = ({ content }: { content: DataType }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
   return (
     <Card
       className="grid-card-container"
@@ -23,13 +38,13 @@ const GridCard = ({ content }: { content: DataType }) => {
         <div className="grid-card-header">
           <Avatar
             sx={{ height: "64px", width: "64px" }}
-            alt={`Image of ${content?.name}`}
+            alt={`Image of ${content?.first_name} ${content?.last_name}`}
             src={content?.image}
           />
           <div className="grid-card-information">
             <div className="grid-user-info">
               <Typography variant="body1" fontWeight={500} color="#212121">
-                {content?.name}
+                {content?.first_name} {content?.last_name}
               </Typography>
               {content?.is_verified && (
                 <img
@@ -44,7 +59,19 @@ const GridCard = ({ content }: { content: DataType }) => {
               {content?.email}
             </Typography>
           </div>
-          <MoreVert />
+          <Button
+            onClick={handleOpen}
+            sx={{
+              display: "flex",
+              position: "absolute",
+              width: "20px",
+              top: "24px",
+              right: "14px",
+              color: "#9E9E9E",
+            }}
+          >
+            <MoreVert />
+          </Button>
         </div>
         <div>
           <Typography variant="caption" fontWeight={400} color="#616161">
@@ -52,6 +79,7 @@ const GridCard = ({ content }: { content: DataType }) => {
           </Typography>
         </div>
       </CardContent>
+      <Modal isOpen={isOpen} handleClose={handleClose} />
     </Card>
   );
 };
