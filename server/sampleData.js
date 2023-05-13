@@ -2,7 +2,8 @@
 const users = [
   {
     id: 1,
-    name: "John Doe",
+    first_name: "John Doe",
+    last_name: "John Doe",
     email: "johndoe@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/1.jpg",
@@ -10,7 +11,8 @@ const users = [
   },
   {
     id: 2,
-    name: "Jane Smith",
+    first_name: "Jane Smith",
+    last_name: "Jane Smith",
     email: "janesmith@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/women/2.jpg",
@@ -18,7 +20,8 @@ const users = [
   },
   {
     id: 3,
-    name: "Bob Johnson",
+    first_name: "Bob",
+    last_name: "Johnson",
     email: "bobjohnson@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/3.jpg",
@@ -27,7 +30,8 @@ const users = [
   },
   {
     id: 4,
-    name: "Emily Rodriguez",
+    first_name: "Emily",
+    last_name: "Rodriguez",
     email: "emilyrodriguez@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/4.jpg",
@@ -36,7 +40,8 @@ const users = [
   },
   {
     id: 5,
-    name: "David Lee",
+    first_name: "David",
+    last_name: "Lee",
     email: "davidlee@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/men/5.jpg",
@@ -45,7 +50,8 @@ const users = [
   },
   {
     id: 6,
-    name: "Sarah Kim",
+    first_name: "Sarah",
+    last_name: "Kim",
     email: "sarahkim@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/6.jpg",
@@ -54,7 +60,8 @@ const users = [
   },
   {
     id: 7,
-    name: "Alex Wong",
+    first_name: "Alex",
+    last_name: "Wong",
     email: "alexwong@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/men/7.jpg",
@@ -63,7 +70,8 @@ const users = [
   },
   {
     id: 8,
-    name: "Karen Chen",
+    first_name: "Karen",
+    last_name: "Chen",
     email: "karenchen@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/women/8.jpg",
@@ -71,7 +79,8 @@ const users = [
   },
   {
     id: 9,
-    name: "Michael Kim",
+    first_name: "Michael",
+    last_name: "Kim",
     email: "michaelkim@example.com",
     is_verified: true,
     image: "https://randomuser.me/api/portraits/men/9.jpg",
@@ -80,7 +89,8 @@ const users = [
   },
   {
     id: 10,
-    name: "Jennifer Lee",
+    first_name: "Jennifer",
+    last_name: "Lee",
     email: "jenniferlee@example.com",
     is_verified: false,
     image: "https://randomuser.me/api/portraits/women/10.jpg",
