@@ -14,7 +14,7 @@ import {
 
 type Props = {
   isOpen: boolean;
-  handleClose: () => { boolean: boolean };
+  handleClose: () => void;
 };
 
 interface FormValues {
@@ -229,7 +229,7 @@ const ModalComponent = ({ isOpen, handleClose }: Props) => {
                     name="is_verified"
                   />
                 }
-                label
+                label=""
               />
             </Box>
           </Box>
