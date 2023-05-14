@@ -8,6 +8,20 @@ export const DELETE_USER = gql`
   }
 `;
 
+export const FILTER_USERS = gql`
+  mutation filterUsers($filter: String!) {
+    filterUsers(filter: $filter) {
+      id
+      first_name
+      last_name
+      email
+      is_verified
+      image
+      description
+    }
+  }
+`;
+
 export const ADD_USER = gql`
   mutation addUser(
     $first_name: String!
