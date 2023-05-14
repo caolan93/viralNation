@@ -12,15 +12,6 @@ const initialState = {
   },
 };
 
-// First, create the thunk
-// export const getData: any = createAsyncThunk(
-//   "googleRange/getData",
-//   async (range?: string) => {
-//     const response = await getTableDataJSON(range);
-//     return response;
-//   }
-// );
-
 export const formSlice = createSlice({
   name: "formValues",
   initialState,
@@ -40,19 +31,6 @@ export const formSlice = createSlice({
       state.formValues = action.payload;
     },
   },
-  //   extraReducers: (builder) => {
-  //     builder
-  //       .addCase(getData.pending, (state) => {
-  //         state.loading = true;
-  //       })
-  //       .addCase(getData.fulfilled, (state, { payload }) => {
-  //         state.loading = false;
-  //         state.tableData = payload;
-  //       })
-  //       .addCase(getData.rejected, (state) => {
-  //         state.loading = false;
-  //       });
-  //   },
 });
 
 export const { clearForm, setFormValues } = formSlice.actions;
