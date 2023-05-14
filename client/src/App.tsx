@@ -1,5 +1,6 @@
 import "./App.scss";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
@@ -26,6 +27,7 @@ function App() {
     <ApolloProvider client={client}>
       <Navbar />
       <HomePage />
+      <Footer />
     </ApolloProvider>
   );
 }
