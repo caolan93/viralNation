@@ -16,26 +16,31 @@ import Modal from "./Modal";
 
 // Redux
 import { setFormValues } from "../../../redux/form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Assets
 import verified from "../../../assets/verified.png";
 
 // Styling
 import "../../../styles/components/grid/gridCard/gridCard.scss";
-import { RootState } from "../../../store";
 
 type Props = {
   content: Profile;
+  cardIndex: number;
+  dropdown: boolean;
+  handleDropdown: Function;
   isFormOpen: () => void;
 };
 
-const GridCard = ({ content, ...props }: Props) => {
+const GridCard = ({
+  content,
+  handleDropdown,
+  isFormOpen,
+  dropdown,
+  cardIndex,
+}: Props) => {
   const dispatch = useDispatch();
-  const formValues = useSelector((state: RootState) => state.form.formValues);
-  console.log(formValues);
   const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -44,16 +49,13 @@ const GridCard = ({ content, ...props }: Props) => {
     setIsOpen(true);
   };
 
-  const handleDropdownClose = () => {
-    setIsDropdownOpen(false);
-  };
   const handleDropdownOpen = () => {
-    setIsDropdownOpen(true);
+    handleDropdown(cardIndex);
     dispatch(setFormValues(content));
   };
 
   const handleForm = () => {
-    props.isFormOpen();
+    isFormOpen();
   };
 
   const buttonStyle = {
@@ -112,7 +114,7 @@ const GridCard = ({ content, ...props }: Props) => {
               color: "#9E9E9E",
             }}
           >
-            {isDropdownOpen && (
+            {dropdown && (
               <Box
                 sx={{
                   display: "flex",

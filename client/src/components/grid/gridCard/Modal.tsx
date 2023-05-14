@@ -6,6 +6,8 @@ import { Modal, Typography, Box, Button, Divider } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { DELETE_USER } from "../../../graphQL/mutations";
 import { GET_USERS } from "../../../graphQL/queries";
+import { useDispatch } from "react-redux";
+import { clearForm } from "../../../redux/form";
 
 type Props = {
   isOpen: boolean;
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
+  const dispatch = useDispatch();
   const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_USERS }],
   });
@@ -36,6 +39,7 @@ const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
           id: id,
         },
       });
+      dispatch(clearForm());
       Swal.fire({
         icon: "success",
         title: "Success!",

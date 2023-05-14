@@ -1,13 +1,21 @@
 import { useState } from "react";
+import { gql } from "@apollo/client";
+import { Audio } from "react-loader-spinner";
 
 // Material UI Components
-import { Hidden, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Hidden,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Container,
+} from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { ViewWeek } from "@mui/icons-material";
 import { List } from "@mui/icons-material";
-// import { data } from "../../assets/dataArr";
 import { useQuery } from "@apollo/client";
-import { GET_USERS } from "../../graphQL/queries";
+// import { FILTER_USERS } from "../../graphQL/mutations";
 
 // Components
 import GridCard from "./gridCard/Card";
@@ -15,8 +23,48 @@ import Form from "../Form";
 
 // Styling
 import "../../styles/components/grid/grid.scss";
+import { ClipLoader } from "react-spinners";
+import { useSelector } from "react-redux";
 
 const GridPage = () => {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+
+  const [dropdown, setDropdown] = useState<number | null>(null);
+
+  const handleDropdown = (cardIndex: number) => {
+    if (dropdown === cardIndex) {
+      setDropdown(null);
+    } else {
+      setDropdown(cardIndex);
+    }
+  };
+
+  const handleSearch = async (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { value } = e.target;
+    setSearch(value);
+
+    setTimeout(() => {
+      setFilter(value);
+    }, 500);
+  };
+
+  const GET_USERS = gql`
+    query {
+      users(filter: "${filter}") {
+        id
+        first_name
+        last_name
+        email
+        is_verified
+        image
+        description
+      }
+    }
+  `;
+
   const { loading, error, data } = useQuery(GET_USERS);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +79,59 @@ const GridPage = () => {
   if (loading) {
     return (
       <>
-        <p>Loading...</p>
+        <div className="grid-container">
+          <Grid justifyContent="center" container>
+            <Grid lg={9} xs={12} item>
+              <Grid className="input-container" item xs={12}>
+                <Grid item xs={12}>
+                  <TextField value={search} onChange={handleSearch} fullWidth />
+                </Grid>
+                <Grid className="buttons-container" item xs={12} lg={3}>
+                  <Button
+                    onClick={handleOpen}
+                    color="primary"
+                    variant="outlined"
+                    startIcon={
+                      <PersonAdd sx={{ height: "16px", width: "16px" }} />
+                    }
+                  >
+                    <Typography
+                      sx={{ textTransform: "none", whiteSpace: "pre" }}
+                      variant="body2"
+                    >
+                      Create Profile
+                    </Typography>
+                  </Button>
+                  <Hidden smDown={true}>
+                    <Button
+                      className="layout-switch-btn"
+                      variant="outlined"
+                      startIcon={
+                        <ViewWeek sx={{ height: "20px", width: "20px" }} />
+                      }
+                      endIcon={<List sx={{ height: "25px", width: "25px" }} />}
+                    />
+                  </Hidden>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ClipLoader
+            color="#3DACFF"
+            loading={true}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </Container>
       </>
     );
   }
@@ -52,7 +152,7 @@ const GridPage = () => {
             <Grid lg={9} xs={12} item>
               <Grid className="input-container" item xs={12}>
                 <Grid item xs={12}>
-                  <TextField fullWidth />
+                  <TextField value={search} onChange={handleSearch} fullWidth />
                 </Grid>
                 <Grid className="buttons-container" item xs={12} lg={3}>
                   <Button
@@ -99,7 +199,13 @@ const GridPage = () => {
                     lg={3}
                     item
                   >
-                    <GridCard content={value} isFormOpen={handleOpen} />
+                    <GridCard
+                      content={value}
+                      cardIndex={index}
+                      dropdown={dropdown === index}
+                      handleDropdown={handleDropdown}
+                      isFormOpen={handleOpen}
+                    />
                   </Grid>
                 ))}
               </Grid>
