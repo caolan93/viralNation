@@ -1,13 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Switch,
-  BottomNavigation,
-} from "@mui/material";
-import { DarkMode } from "@mui/icons-material";
-import { LightMode } from "@mui/icons-material";
+import { Typography, BottomNavigation } from "@mui/material";
 
 const Footer = () => {
   return (
