@@ -23,6 +23,7 @@ const UserType = new GraphQLObjectType({
     image: { type: GraphQLString },
     description: { type: GraphQLString },
     is_verified: { type: GraphQLBoolean },
+    filter: { type: GraphQLString },
   }),
 });
 
@@ -32,7 +33,21 @@ const RootQuery = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parent, args) {
-        return User.find();
+        return User.find({});
+      },
+    },
+    filterUsers: {
+      type: new GraphQLList(UserType),
+      args: { filter: { type: GraphQLString } },
+      resolve(parent, args) {
+        return User.find({
+          $or: [
+            { first_name: { $regex: args.filter, $options: "i" } },
+            { last_name: { $regex: args.filter, $options: "i" } },
+            { email: { $regex: args.filter, $options: "i" } },
+            { description: { $regex: args.filter, $options: "i" } },
+          ],
+        });
       },
     },
     user: {
