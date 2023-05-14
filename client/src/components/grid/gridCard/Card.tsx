@@ -71,7 +71,6 @@ const GridCard = ({
     <Card
       className="grid-card-container"
       sx={{
-        backgroundColor: "#EEEEEE",
         borderRadius: "8px",
         padding: "0",
         width: "100%",
