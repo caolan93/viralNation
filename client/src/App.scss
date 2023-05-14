@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.swal2-container.swal2-center.swal2-backdrop-show {
+  z-index: 9999;
+  font-family: "Roboto";
+  .swal2-actions {
+    button {
+      background: #3dacff;
+      font-family: "Roboto";
+      width: 100px;
+      outline: none;
+      border: none;
+      margin: 0;
+      transition: ease 150ms;
+      &:focus,
+      &:active {
+        outline: none;
+        border: none;
+        box-shadow: none;
+      }
+      &:hover {
+        scale: 1.03;
+        background-color: darken($color: #3dacff, $amount: 10%);
+        transition: ease 150ms;
+      }
+    }
+  }
+}

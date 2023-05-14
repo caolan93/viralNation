@@ -15,7 +15,7 @@ import {
 import "../styles/components/form.scss";
 
 // GRAPHQL API
-import { ADD_USER } from "../graphQL/mutations";
+import { ADD_USER, UPDATE_USER } from "../graphQL/mutations";
 import { useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 import { GET_USERS } from "../graphQL/queries";
@@ -32,19 +32,32 @@ type Props = {
 
 const Form = ({ isOpen, handleClose }: Props) => {
   const dispatch = useDispatch();
+
   const initialValues = useSelector(
     (state: RootState) => state?.form?.formValues
   );
 
   const [formValues, setFormValues] = useState<FormValues>({
-    id: initialValues?.id || "",
-    image: initialValues?.image || "",
-    first_name: initialValues?.first_name || "",
-    last_name: initialValues?.last_name || "",
-    email: initialValues?.email || "",
-    description: initialValues?.description || "",
-    is_verified: initialValues?.is_verified || false,
+    id: "",
+    image: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    description: "",
+    is_verified: false,
   });
+
+  useEffect(() => {
+    setFormValues({
+      id: initialValues?.id,
+      image: initialValues?.image,
+      first_name: initialValues?.first_name,
+      last_name: initialValues?.last_name,
+      email: initialValues?.email,
+      description: initialValues?.description,
+      is_verified: initialValues?.is_verified,
+    });
+  }, [initialValues]);
 
   const labelStyling = {
     fontFamily: "Roboto",
@@ -78,26 +91,47 @@ const Form = ({ isOpen, handleClose }: Props) => {
     },
   });
 
+  const [updateUser] = useMutation(UPDATE_USER, {
+    variables: { ...formValues },
+    refetchQueries: [{ query: GET_USERS }],
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await addUser({
-        variables: {
-          ...formValues,
-        },
-      });
 
-      Swal.fire({
-        icon: "success",
-        title: "Success!",
-        text: "User created successfully!",
-      });
-      handleExit();
+      if (initialValues.id !== "") {
+        await updateUser({
+          variables: {
+            ...formValues,
+          },
+        });
+
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "User updated successfully!",
+        });
+        handleExit();
+      } else {
+        await addUser({
+          variables: {
+            ...formValues,
+          },
+        });
+
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "User created successfully!",
+        });
+        handleExit();
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "There was an error",
+        text: `${error}`,
       });
     }
   };
@@ -165,9 +199,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="image"
                 name="image"
-                value={
-                  initialValues.image ? initialValues.image : formValues.image
-                }
+                value={formValues.image}
                 onChange={handleFormChange}
                 required
               />
@@ -188,11 +220,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
                   style={{ width: "100%" }}
                   id="first_name"
                   name="first_name"
-                  value={
-                    initialValues.first_name
-                      ? initialValues.first_name
-                      : formValues.first_name
-                  }
+                  value={formValues.first_name}
                   onChange={handleFormChange}
                   required
                 />
@@ -204,11 +232,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 <OutlinedInput
                   style={{ width: "100%" }}
                   id="last_name"
-                  value={
-                    initialValues.last_name
-                      ? initialValues.last_name
-                      : formValues.last_name
-                  }
+                  value={formValues.last_name}
                   name="last_name"
                   onChange={handleFormChange}
                   required
@@ -224,9 +248,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="email"
                 name="email"
-                value={
-                  initialValues.email ? initialValues.email : formValues.email
-                }
+                value={formValues.email}
                 onChange={handleFormChange}
                 required
               />
@@ -241,11 +263,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 style={{ width: "100%" }}
                 id="description"
                 name="description"
-                value={
-                  initialValues.description
-                    ? initialValues.description
-                    : formValues.description
-                }
+                value={formValues.description}
                 onChange={handleFormChange}
                 required
               />
@@ -269,11 +287,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={
-                      initialValues.is_verified
-                        ? initialValues.is_verified
-                        : formValues.is_verified
-                    }
+                    checked={formValues.is_verified}
                     onChange={handleFormChange}
                     name="is_verified"
                   />

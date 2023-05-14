@@ -1,8 +1,0 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.swal2-container.swal2-center.swal2-backdrop-show {
-  z-index: 9999;
-}

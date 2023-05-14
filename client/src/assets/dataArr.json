@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "johndoe@gmail.com",
+      "image": "https://example.com/avatar1.jpg",
+      "description": "A software engineer with 5 years of experience in web development.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "janedoe@gmail.com",
+      "image": "https://example.com/avatar2.jpg",
+      "description": "A freelance graphic designer with a passion for creating minimalist designs.",
+      "is_verified": false
+    },
+    {
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "email": "bobsmith@gmail.com",
+      "image": "https://example.com/avatar3.jpg",
+      "description": "A business consultant with experience in helping startups grow.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Emily",
+      "last_name": "Jones",
+      "email": "emilyjones@gmail.com",
+      "image": "https://example.com/avatar4.jpg",
+      "description": "A high school English teacher with a passion for literature.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Michael",
+      "last_name": "Lee",
+      "email": "michaellee@gmail.com",
+      "image": "https://example.com/avatar5.jpg",
+      "description": "A data analyst with experience in analyzing marketing data.",
+      "is_verified": false
+    },
+    {
+      "first_name": "Samantha",
+      "last_name": "Wong",
+      "email": "samanthawong@gmail.com",
+      "image": "https://example.com/avatar6.jpg",
+      "description": "A UX designer with a passion for creating intuitive interfaces.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Mark",
+      "last_name": "Johnson",
+      "email": "markjohnson@gmail.com",
+      "image": "https://example.com/avatar7.jpg",
+      "description": "An entrepreneur with experience in starting and growing successful businesses.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Lisa",
+      "last_name": "Chen",
+      "email": "lisachen@gmail.com",
+      "image": "https://example.com/avatar8.jpg",
+      "description": "A marketing manager with experience in developing and implementing marketing strategies.",
+      "is_verified": false
+    },
+    {
+      "first_name": "David",
+      "last_name": "Nguyen",
+      "email": "davidnguyen@gmail.com",
+      "image": "https://example.com/avatar9.jpg",
+      "description": "A software developer with a passion for creating clean and maintainable code.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Megan",
+      "last_name": "Taylor",
+      "email": "megantaylor@gmail.com",
+      "image": "https://example.com/avatar10.jpg",
+      "description": "A social media specialist with experience in creating engaging content.",
+      "is_verified": true
+    },
+    {
+      "first_name": "Tom",
+      "last_name": "Wilson",
+      "email": "tomwilson@gmail.com",
+      "image": "https://example.com/avatar11.jpg",
+      "description": "A project manager with experience in managing software development projects.",
+      "is_verified": false
+    }
+  ]
+}

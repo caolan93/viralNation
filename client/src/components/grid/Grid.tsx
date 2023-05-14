@@ -87,7 +87,7 @@ const GridPage = () => {
           <Grid justifyContent="center" container>
             <Grid lg={9} xs={12} item>
               <Grid spacing={{ xs: 0, sm: 3 }} rowSpacing={{ xs: 3 }} container>
-                {data?.users?.map((value: DataType, index: number) => (
+                {data?.users?.map((value: Profile, index: number) => (
                   <Grid
                     sx={{
                       display: "flex",

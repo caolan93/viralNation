@@ -16,13 +16,14 @@ import Modal from "./Modal";
 
 // Redux
 import { setFormValues } from "../../../redux/form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Assets
 import verified from "../../../assets/verified.png";
 
 // Styling
 import "../../../styles/components/grid/gridCard/gridCard.scss";
+import { RootState } from "../../../store";
 
 type Props = {
   content: Profile;
@@ -31,6 +32,8 @@ type Props = {
 
 const GridCard = ({ content, ...props }: Props) => {
   const dispatch = useDispatch();
+  const formValues = useSelector((state: RootState) => state.form.formValues);
+  console.log(formValues);
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -46,10 +49,10 @@ const GridCard = ({ content, ...props }: Props) => {
   };
   const handleDropdownOpen = () => {
     setIsDropdownOpen(true);
+    dispatch(setFormValues(content));
   };
 
   const handleForm = () => {
-    dispatch(setFormValues(content));
     props.isFormOpen();
   };
 
@@ -98,7 +101,7 @@ const GridCard = ({ content, ...props }: Props) => {
               {content?.email}
             </Typography>
           </div>
-          <Button
+          <Box
             onClick={handleDropdownOpen}
             sx={{
               display: "flex",
@@ -135,7 +138,7 @@ const GridCard = ({ content, ...props }: Props) => {
               </Box>
             )}
             <MoreVert />
-          </Button>
+          </Box>
         </div>
         <div>
           <Typography variant="caption" fontWeight={400} color="#616161">

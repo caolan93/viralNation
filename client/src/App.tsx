@@ -1,12 +1,7 @@
-import "./App.css";
+import "./App.scss";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  HttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 // const httpLink = new HttpLink({
