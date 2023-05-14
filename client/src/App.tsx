@@ -3,19 +3,13 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useMemo } from "react";
+import { RootState } from "./store";
+import { useSelector } from "react-redux";
 
-// const httpLink = new HttpLink({
-//   uri: "http://localhost:5000/graphiql",
-// });
-
-// const authLink = setContext((_, { headers }) => {
-//   return {
-//     headers: {
-//       ...headers,
-//     },
-//   };
-// });
+// Material UI Theme
+import { getDesignTokens } from "./theme";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphiql",
@@ -23,12 +17,17 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const mode = useSelector((state: RootState) => state?.mode.mode);
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+
   return (
-    <ApolloProvider client={client}>
-      <Navbar />
-      <HomePage />
-      <Footer />
-    </ApolloProvider>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+        <Navbar />
+        <HomePage />
+        <Footer />
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }
 

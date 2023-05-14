@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import form from "./redux/form";
+import mode from "./redux/mode";
 
 export const store = configureStore({
   reducer: {
     form,
+    mode,
   },
 });
 
