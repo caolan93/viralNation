@@ -1,15 +1,14 @@
 import "./App.scss";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useMemo } from "react";
-import { RootState } from "./store";
+
 import { useSelector } from "react-redux";
 
 // Material UI Theme
 import { getDesignTokens } from "./theme";
+import { RootState } from "./store";
 
 // let string = import.meta.env.BASE_URL;
 
@@ -18,12 +17,12 @@ import { getDesignTokens } from "./theme";
 //   cache: new InMemoryCache(),
 // });
 const client = new ApolloClient({
-  uri: "https://viral-nation-task-6mpdv3dlh-caolan93.vercel.app/graphiql",
+  uri: "http://localhost:5000/graphiql",
   cache: new InMemoryCache(),
 });
 
 function App() {
-  const mode = useSelector((state) => state?.mode.mode);
+  const mode = useSelector((state: RootState) => state?.mode.mode);
   const theme = createTheme(getDesignTokens(mode));
 
   console.log(`${mode}`, theme);
