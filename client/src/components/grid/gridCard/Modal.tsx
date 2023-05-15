@@ -6,8 +6,12 @@ import { Modal, Typography, Box, Button, Divider } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { DELETE_USER } from "../../../graphQL/mutations";
 import { GET_USERS } from "../../../graphQL/queries";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearForm } from "../../../redux/form";
+import { RootState } from "../../../store";
+
+// Styling
+import "../../../styles/components/grid/gridCard/modal.scss";
 
 type Props = {
   isOpen: boolean;
@@ -17,19 +21,10 @@ type Props = {
 
 const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
   const dispatch = useDispatch();
+  const mode = useSelector((state: RootState) => state?.mode.mode);
   const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_USERS }],
   });
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 500,
-    height: "auto",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-  };
 
   const handleDeleteUser = async (id: string) => {
     try {
@@ -61,7 +56,10 @@ const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box
+        sx={{ backgroundColor: mode === "light" ? "#FCFCFD" : "#2B2B2B" }}
+        className="dropdown-modal"
+      >
         <Box
           sx={{
             p: 3,
@@ -70,7 +68,12 @@ const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h5">Remove Profile</Typography>
+          <Typography
+            color={mode === "light" ? "#212121" : "#E0E0E0"}
+            variant="h5"
+          >
+            Remove Profile
+          </Typography>
           <Button
             sx={{
               color: "#9E9E9E",
@@ -84,17 +87,16 @@ const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
           </Button>
         </Box>
         <Divider />
-        <Box
-          sx={{
-            py: 2,
-            px: 3,
-            boxSizing: "border-box",
-            display: "flex",
-            gap: "16px",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+        <Typography
+          color={mode === "light" ? "#212121" : "#E0E0E0"}
+          variant="body2"
+          sx={{ p: 3 }}
         >
+          Removed profile will be deleted permenantly and won’t be available
+          anymore.
+        </Typography>
+        <Divider />
+        <Box className="buttons-container">
           <Button onClick={handleClose} variant="contained" color="primary">
             <Typography>Cancel</Typography>
           </Button>

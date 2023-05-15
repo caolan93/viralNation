@@ -8,6 +8,7 @@ import {
   Avatar,
   Button,
   Box,
+  lighten,
 } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
@@ -62,10 +63,12 @@ const GridCard = ({
 
   const buttonStyle = {
     textTransform: "none",
-    color: "#2B2B2B",
     p: 2,
+    backgroundColor: mode === "light" ? "#EEEEEE" : "#181A1C",
+    color: mode === "light" ? "#181A1C" : "#EEEEEE",
+    borderRadius: 0,
     "&:hover": {
-      backgroundColor: "#f3f3f3",
+      backgroundColor: mode === "light" ? "#e2e2e2" : "#181A1CE6",
     },
   };
 
@@ -126,17 +129,36 @@ const GridCard = ({
                   background: "#FFF",
                   top: "0",
                   right: "0",
-                  color: "#9E9E9E",
+                  backgroundColor:
+                    mode === "light"
+                      ? lighten("#FCFCFD", 10)
+                      : lighten("#2B2B2B", 10),
                   boxShadow: 2,
                 }}
               >
-                <Button onClick={handleForm} sx={buttonStyle}>
-                  <Typography sx={{ whiteSpace: "pre" }}>
+                <Button
+                  className="dropdown-btn"
+                  onClick={handleForm}
+                  sx={buttonStyle}
+                >
+                  <Typography
+                    sx={{
+                      whiteSpace: "pre",
+                    }}
+                  >
                     Edit profile
                   </Typography>
                 </Button>
-                <Button onClick={handleOpen} sx={buttonStyle}>
-                  <Typography sx={{ whiteSpace: "pre" }}>
+                <Button
+                  className="dropdown-btn"
+                  onClick={handleOpen}
+                  sx={buttonStyle}
+                >
+                  <Typography
+                    sx={{
+                      whiteSpace: "pre",
+                    }}
+                  >
                     Remove Profile
                   </Typography>
                 </Button>
