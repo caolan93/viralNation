@@ -86,7 +86,7 @@ const GridCard = ({
           />
           <div className="grid-card-information">
             <div className="grid-user-info">
-              <Typography variant="body1" fontWeight={500} color="#212121">
+              <Typography color="secondary" variant="body1" fontWeight={500}>
                 {content?.first_name} {content?.last_name}
               </Typography>
               {content?.is_verified && (
@@ -98,7 +98,8 @@ const GridCard = ({
                 />
               )}
             </div>
-            <Typography variant="body2" fontWeight={400} color="#2B2B2B">
+
+            <Typography color="navbar" variant="body2" fontWeight={400}>
               {content?.email}
             </Typography>
           </div>
