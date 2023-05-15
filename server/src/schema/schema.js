@@ -1,5 +1,3 @@
-const { users } = require("../sampleData");
-
 // Mongoose Model
 const User = require("../models/User");
 
