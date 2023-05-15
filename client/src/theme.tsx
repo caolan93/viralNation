@@ -21,6 +21,9 @@ export const getDesignTokens = (mode) => ({
           text: {
             color: "#616161",
           },
+          btnOutlined: {
+            main: "#3DACFF",
+          },
         }
       : {
           primary: {
@@ -37,6 +40,9 @@ export const getDesignTokens = (mode) => ({
           },
           text: {
             color: "#FFF",
+          },
+          btnOutlined: {
+            main: "#FFFFFF10",
           },
         }),
   },

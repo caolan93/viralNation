@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { gql } from "@apollo/client";
-import { Audio } from "react-loader-spinner";
 
 // Material UI Components
 import {
@@ -90,11 +89,16 @@ const GridPage = () => {
                 </Grid>
                 <Grid className="buttons-container" item xs={12} lg={3}>
                   <Button
-                    onClick={handleOpen}
-                    color="primary"
                     variant="outlined"
+                    onClick={handleOpen}
                     startIcon={
-                      <PersonAdd sx={{ height: "16px", width: "16px" }} />
+                      <PersonAdd
+                        sx={{
+                          color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          height: "16px",
+                          width: "16px",
+                        }}
+                      />
                     }
                   >
                     <Typography
@@ -109,9 +113,23 @@ const GridPage = () => {
                       className="layout-switch-btn"
                       variant="outlined"
                       startIcon={
-                        <ViewWeek sx={{ height: "20px", width: "20px" }} />
+                        <ViewWeek
+                          sx={{
+                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                        />
                       }
-                      endIcon={<List sx={{ height: "25px", width: "25px" }} />}
+                      endIcon={
+                        <List
+                          sx={{
+                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                        />
+                      }
                     />
                   </Hidden>
                 </Grid>
@@ -161,12 +179,25 @@ const GridPage = () => {
                     onClick={handleOpen}
                     color="primary"
                     variant="outlined"
+                    sx={{
+                      borderColor: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                    }}
                     startIcon={
-                      <PersonAdd sx={{ height: "16px", width: "16px" }} />
+                      <PersonAdd
+                        sx={{
+                          color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          height: "16px",
+                          width: "16px",
+                        }}
+                      />
                     }
                   >
                     <Typography
-                      sx={{ textTransform: "none", whiteSpace: "pre" }}
+                      sx={{
+                        textTransform: "none",
+                        whiteSpace: "pre",
+                        color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                      }}
                       variant="body2"
                     >
                       Create Profile
@@ -176,10 +207,27 @@ const GridPage = () => {
                     <Button
                       className="layout-switch-btn"
                       variant="outlined"
+                      sx={{
+                        borderColor: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                      }}
                       startIcon={
-                        <ViewWeek sx={{ height: "20px", width: "20px" }} />
+                        <ViewWeek
+                          sx={{
+                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                        />
                       }
-                      endIcon={<List sx={{ height: "25px", width: "25px" }} />}
+                      endIcon={
+                        <List
+                          sx={{
+                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                        />
+                      }
                     />
                   </Hidden>
                 </Grid>

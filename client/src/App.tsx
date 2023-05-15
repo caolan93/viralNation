@@ -18,7 +18,6 @@ const client = new ApolloClient({
 
 function App() {
   const mode = useSelector((state) => state?.mode.mode);
-  console.log("APP", mode);
   const theme = createTheme(getDesignTokens(mode));
 
   console.log(`${mode}`, theme);
