@@ -36,6 +36,7 @@ const Form = ({ isOpen, handleClose }: Props) => {
   const initialValues = useSelector(
     (state: RootState) => state?.form?.formValues
   );
+  const mode = useSelector((state: RootState) => state?.mode.mode);
 
   const [formValues, setFormValues] = useState<FormValues>({
     id: "",
@@ -155,7 +156,12 @@ const Form = ({ isOpen, handleClose }: Props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box className="modal-container">
+      <Box
+        sx={{
+          backgroundColor: mode === "light" ? "#FFF" : "#181A1C",
+        }}
+        className="modal-container"
+      >
         <form onSubmit={handleSubmit}>
           <Box
             sx={{
@@ -165,17 +171,24 @@ const Form = ({ isOpen, handleClose }: Props) => {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h5">Create Profile</Typography>
+            <Typography
+              sx={{
+                color: mode === "light" ? "#181A1C" : "#FFF",
+              }}
+              color="cardTitle"
+              variant="h5"
+            >
+              Create Profile
+            </Typography>
             <Button
               sx={{
-                color: "#9E9E9E",
                 display: "flex",
                 padding: 0,
                 justifyContent: "flex-end",
               }}
               onClick={handleExit}
             >
-              <Close />
+              <Close sx={{ color: "#9E9E9E" }} />
             </Button>
           </Box>
           <Divider />
@@ -271,9 +284,9 @@ const Form = ({ isOpen, handleClose }: Props) => {
             <Box
               sx={{
                 border: 1,
-                borderColor: "#E0E0E0",
+                borderColor: mode === "light" ? "#E0E0E0" : "#2b2B2B",
                 borderRadius: "4px",
-                background: "#EEEEEE",
+                background: mode === "light" ? "#EEEEEE" : "#212121",
                 display: "flex",
                 height: "40px",
                 width: "100%",
@@ -283,10 +296,16 @@ const Form = ({ isOpen, handleClose }: Props) => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="body2">Talent is verified</Typography>
+              <Typography
+                sx={{ color: mode === "light" ? "#212121" : "#EEEEEE" }}
+                variant="body2"
+              >
+                Talent is verified
+              </Typography>
               <FormControlLabel
                 control={
                   <Switch
+                    color="secondary"
                     checked={formValues.is_verified}
                     onChange={handleFormChange}
                     name="is_verified"
@@ -308,10 +327,23 @@ const Form = ({ isOpen, handleClose }: Props) => {
           >
             <Button
               type="submit"
-              sx={{ px: "12px", py: "8", textTransform: "none" }}
+              disableElevation
+              sx={{
+                backgroundColor: "#3DACFF",
+                px: "12px",
+                py: "8",
+                textTransform: "none",
+              }}
               variant="contained"
             >
-              Create Profile
+              <Typography
+                sx={{
+                  color: "#F5f5f5",
+                }}
+                variant="body2"
+              >
+                {formValues?.id !== "" ? "Update Profile" : "Create Profile"}
+              </Typography>
             </Button>
           </Box>
         </form>

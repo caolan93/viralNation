@@ -10,7 +10,7 @@ export const getDesignTokens = (mode) => ({
             main: "#FCFCFD",
           },
           secondary: {
-            main: "#fd983f",
+            main: "#3DACFF",
           },
           cardTitle: {
             main: "#212121",
@@ -30,7 +30,7 @@ export const getDesignTokens = (mode) => ({
             main: "#181A18",
           },
           secondary: {
-            main: "#048f34",
+            main: "#3DACFF",
           },
           cardTitle: {
             main: "#FFF",

@@ -38,16 +38,20 @@ const RootQuery = new GraphQLObjectType({
     // },
     users: {
       type: new GraphQLList(UserType),
-      args: { filter: { type: GraphQLString } },
+      args: {
+        filter: { type: GraphQLString },
+      },
       resolve(parent, args) {
-        return User.find({
+        const query = {
           $or: [
             { first_name: { $regex: args.filter, $options: "i" } },
             { last_name: { $regex: args.filter, $options: "i" } },
             { email: { $regex: args.filter, $options: "i" } },
             { description: { $regex: args.filter, $options: "i" } },
           ],
-        });
+        };
+
+        return User.find(query).sort({ createdAt: -1 });
       },
     },
     user: {

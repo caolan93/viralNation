@@ -9,7 +9,7 @@ export const DELETE_USER = gql`
 `;
 
 export const FILTER_USERS = gql`
-  mutation filterUsers($filter: String!) {
+  mutation filterUsers($filter: String!, $orderBy: String!) {
     filterUsers(filter: $filter) {
       id
       first_name
