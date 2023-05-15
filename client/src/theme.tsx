@@ -1,34 +1,33 @@
 // @ts-nocheck
 import { createTheme } from "@mui/material";
 
-export const getDesignTokens = (mode: PaletteMode) => ({
+export const getDesignTokens = (mode) => ({
   palette: {
     mode,
     ...(mode === "light"
       ? {
-          palette: {
-            primary: {
-              main: "#54f353",
-            },
-            secondary: {
-              main: "#fd983f",
-            },
-            cardBackground: {
-              main: "#EEEEEE",
-            },
+          primary: {
+            main: "#FCFCFD",
+          },
+          secondary: {
+            main: "#fd983f",
+          },
+          cardBackground: {
+            main: "#fd9848",
+          },
+          navbar: {
+            main: "#FCFCFD",
           },
         }
       : {
-          palette: {
-            secondary: {
-              main: "#048f34",
-            },
-            primary: {
-              main: "#D93F09",
-            },
-            cardBackground: {
-              main: "#181A1C",
-            },
+          secondary: {
+            main: "#048f34",
+          },
+          primary: {
+            main: "#D93F09",
+          },
+          primary: {
+            main: "#181A1C",
           },
         }),
   },

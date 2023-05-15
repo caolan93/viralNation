@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Switch,
-  Button,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Switch } from "@mui/material";
 import { DarkMode } from "@mui/icons-material";
 import { LightMode } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
@@ -14,10 +7,10 @@ import { toggleMode } from "../redux/mode";
 const Navbar = () => {
   const dispatch = useDispatch();
   return (
-    <AppBar sx={{ background: "#FFF", minHeight: "unset" }} position="static">
+    <AppBar color="primary" sx={{ minHeight: "unset" }} position="static">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography
-          color="#121212"
+          color="cardBackground"
           sx={{ display: "flex", alignItems: "center", fontWeight: "400" }}
           variant="body2"
         >

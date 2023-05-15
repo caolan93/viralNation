@@ -17,8 +17,11 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const mode = useSelector((state: RootState) => state?.mode.mode);
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const mode = useSelector((state) => state?.mode.mode);
+  console.log("APP", mode);
+  const theme = createTheme(getDesignTokens(mode));
+
+  console.log(`${mode}`, theme);
 
   return (
     <ThemeProvider theme={theme}>
