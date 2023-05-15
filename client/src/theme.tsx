@@ -9,28 +9,34 @@ export const getDesignTokens = (mode) => ({
           primary: {
             main: "#FCFCFD",
           },
-          text: {
-            color: "#616161",
-          },
           secondary: {
             main: "#fd983f",
           },
-          cardBackground: {
-            main: "#fd9848",
+          cardTitle: {
+            main: "#212121",
           },
-          navbar: {
-            main: "#FCFCFD",
+          cardSubtitle: {
+            main: "#2B2B2B",
+          },
+          text: {
+            color: "#616161",
           },
         }
       : {
+          primary: {
+            main: "#181A1C",
+          },
           secondary: {
             main: "#048f34",
           },
+          cardTitle: {
+            main: "#FFF",
+          },
+          cardSubtitle: {
+            main: "#FFFFFF80",
+          },
           text: {
             color: "#FFF",
-          },
-          primary: {
-            main: "#181A1C",
           },
         }),
   },
