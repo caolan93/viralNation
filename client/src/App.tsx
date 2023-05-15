@@ -18,7 +18,7 @@ import { getDesignTokens } from "./theme";
 //   cache: new InMemoryCache(),
 // });
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphiql",
+  uri: "https://viral-nation-task-6mpdv3dlh-caolan93.vercel.app/graphiql",
   cache: new InMemoryCache(),
 });
 
