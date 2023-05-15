@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <div
       style={
-        mode === "light" ? { background: "#FFF" } : { background: "#212121" }
+        mode === "light" ? { background: "#F2F2F3" } : { background: "#212121" }
       }
     >
       <GridPage />
