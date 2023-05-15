@@ -25,8 +25,10 @@ import Form from "../Form";
 import "../../styles/components/grid/grid.scss";
 import { ClipLoader } from "react-spinners";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const GridPage = () => {
+  const mode = useSelector((state: RootState) => state?.mode?.mode);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 

@@ -28,7 +28,7 @@ function App() {
       <ApolloProvider client={client}>
         <Navbar />
         <HomePage />
-        <Footer />
+        {/* <Footer /> */}
       </ApolloProvider>
     </ThemeProvider>
   );

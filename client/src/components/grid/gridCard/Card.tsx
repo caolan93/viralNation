@@ -16,13 +16,14 @@ import Modal from "./Modal";
 
 // Redux
 import { setFormValues } from "../../../redux/form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Assets
 import verified from "../../../assets/verified.png";
 
 // Styling
 import "../../../styles/components/grid/gridCard/gridCard.scss";
+import { RootState } from "../../../store";
 
 type Props = {
   content: Profile;
@@ -40,6 +41,7 @@ const GridCard = ({
   cardIndex,
 }: Props) => {
   const dispatch = useDispatch();
+  const mode = useSelector((state: RootState) => state?.mode?.mode);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
@@ -71,6 +73,7 @@ const GridCard = ({
     <Card
       className="grid-card-container"
       sx={{
+        background: mode === "light" ? "#EEEEEE" : "#181A1C",
         borderRadius: "8px",
         padding: "0",
         width: "100%",

@@ -24,7 +24,7 @@ export const getDesignTokens = (mode) => ({
         }
       : {
           primary: {
-            main: "#181A1C",
+            main: "#181A18",
           },
           secondary: {
             main: "#048f34",

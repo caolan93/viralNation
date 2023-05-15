@@ -1,6 +1,6 @@
 .grid-container {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,6 +31,7 @@
     display: flex;
     justify-content: center;
     span {
+      padding: 0;
       margin: 0;
       svg {
       }
@@ -40,8 +41,8 @@
 
 @media only screen and (max-width: 1200px) {
   .grid-container {
-    margin-top: 24px;
-    margin-bottom: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     padding-left: 24px;
     padding-right: 24px;
     .input-container {

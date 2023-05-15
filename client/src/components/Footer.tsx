@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <BottomNavigation
       sx={{
-        position: "fixed",
+        position: "static",
         width: "100%",
         bottom: 0,
         background: "#FFF",
