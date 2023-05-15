@@ -11,6 +11,12 @@ import { useSelector } from "react-redux";
 // Material UI Theme
 import { getDesignTokens } from "./theme";
 
+// let string = import.meta.env.BASE_URL;
+
+// const client = new ApolloClient({
+//   uri: string,
+//   cache: new InMemoryCache(),
+// });
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphiql",
   cache: new InMemoryCache(),

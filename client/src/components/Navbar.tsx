@@ -9,7 +9,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const mode = useSelector((state: RootState) => state?.mode?.mode);
   return (
-    <AppBar color="primary" sx={{ minHeight: "unset" }} position="static">
+    <AppBar color="primary" sx={{ minHeight: "unset" }} position="sticky">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography
           color="cardBackground"

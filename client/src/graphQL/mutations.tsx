@@ -9,15 +9,24 @@ export const DELETE_USER = gql`
 `;
 
 export const FILTER_USERS = gql`
-  mutation filterUsers($filter: String!, $orderBy: String!) {
-    filterUsers(filter: $filter) {
-      id
-      first_name
-      last_name
-      email
-      is_verified
-      image
-      description
+  query getUsers($filter: String!, $first: String, $after: String) {
+    users(filter: $filter, first: $first, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          id
+          first_name
+          last_name
+          email
+          is_verified
+          image
+          description
+        }
+      }
     }
   }
 `;

@@ -9,6 +9,7 @@ import {
   TextField,
   Typography,
   Container,
+  Box,
 } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
 import { ViewWeek } from "@mui/icons-material";
@@ -30,8 +31,33 @@ const GridPage = () => {
   const mode = useSelector((state: RootState) => state?.mode?.mode);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
+  const [nextPage, setNextPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(1);
+  const [first, setFirst] = useState(10);
+  const [offset, setOffset] = useState(0);
 
   const [dropdown, setDropdown] = useState<number | null>(null);
+
+  //Paginated Code
+  // const handlePrevResults = (offset, first) => {
+  //   if (first === 10) {
+  //     return;
+  //   }
+
+  //   let newOffset = offset - 10;
+  //   let newFirst = first - 10;
+
+  //   setFirst(newFirst);
+  //   setOffset(newOffset);
+  // };
+
+  // const handleNextResults = (offset, first) => {
+  //   let newOffset = offset + 10;
+  //   let newFirst = first + 10;
+
+  //   setFirst(newFirst);
+  //   setOffset(newOffset);
+  // };
 
   const handleDropdown = (cardIndex: number) => {
     if (dropdown === cardIndex) {
@@ -117,6 +143,7 @@ const GridPage = () => {
                           sx={{
                             color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
                             height: "20px",
+                            px: 2,
                             width: "20px",
                           }}
                         />
@@ -126,6 +153,7 @@ const GridPage = () => {
                           sx={{
                             color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
                             height: "20px",
+                            px: 2,
                             width: "20px",
                           }}
                         />
@@ -177,10 +205,12 @@ const GridPage = () => {
                 <Grid className="buttons-container" item xs={12} lg={3}>
                   <Button
                     onClick={handleOpen}
-                    color="primary"
                     variant="outlined"
                     sx={{
                       borderColor: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                      "&:hover": {
+                        borderColor: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                      },
                     }}
                     startIcon={
                       <PersonAdd
@@ -204,31 +234,56 @@ const GridPage = () => {
                     </Typography>
                   </Button>
                   <Hidden smDown={true}>
-                    <Button
-                      className="layout-switch-btn"
-                      variant="outlined"
-                      sx={{
-                        borderColor: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
-                      }}
-                      startIcon={
-                        <ViewWeek
-                          sx={{
-                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
-                            height: "20px",
-                            width: "20px",
-                          }}
-                        />
-                      }
-                      endIcon={
-                        <List
-                          sx={{
-                            color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
-                            height: "20px",
-                            width: "20px",
-                          }}
-                        />
-                      }
-                    />
+                    <Box sx={{ display: "flex" }}>
+                      <Button
+                        className="layout-switch-btn"
+                        variant="outlined"
+                        sx={{
+                          borderTopRightRadius: 0,
+                          borderBottomRightRadius: 0,
+                          borderColor:
+                            mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          "&:hover": {
+                            borderColor:
+                              mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          },
+                        }}
+                        startIcon={
+                          <ViewWeek
+                            sx={{
+                              color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                              height: "20px",
+                              px: 2,
+                              width: "20px",
+                            }}
+                          />
+                        }
+                      />
+                      <Button
+                        className="layout-switch-btn"
+                        variant="outlined"
+                        sx={{
+                          borderTopLeftRadius: 0,
+                          borderBottomLeftRadius: 0,
+                          borderColor:
+                            mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          "&:hover": {
+                            borderColor:
+                              mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                          },
+                        }}
+                        startIcon={
+                          <List
+                            sx={{
+                              color: mode === "light" ? "#3DACFF" : "#FFFFFFB3",
+                              height: "20px",
+                              px: 2,
+                              width: "20px",
+                            }}
+                          />
+                        }
+                      />
+                    </Box>
                   </Hidden>
                 </Grid>
               </Grid>
@@ -261,6 +316,20 @@ const GridPage = () => {
               </Grid>
             </Grid>
           </Grid>
+          {/* <Box sx={{ display: "flex", gap: "16px", marginTop: "auto" }}>
+            <Button
+              onClick={() => handlePrevResults(offset, first)}
+              variant="contained"
+            >
+              Prev Results
+            </Button>
+            <Button
+              onClick={() => handleNextResults(offset, first)}
+              variant="contained"
+            >
+              Next Results
+            </Button>
+          </Box> */}
           <Form isOpen={isOpen} handleClose={handleClose} />
         </div>
       )}

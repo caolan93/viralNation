@@ -11,6 +11,8 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLNonNull,
+  GraphQLInt,
+  graphql,
 } = require("graphql");
 
 const UserType = new GraphQLObjectType({
@@ -39,6 +41,8 @@ const RootQuery = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       args: {
+        first: { type: GraphQLInt },
+        offset: { type: GraphQLInt },
         filter: { type: GraphQLString },
       },
       resolve(parent, args) {
@@ -51,7 +55,14 @@ const RootQuery = new GraphQLObjectType({
           ],
         };
 
-        return User.find(query).sort({ createdAt: -1 });
+        // return User.find(query)
+        //   .skip(args.offset)
+        //   .limit(args.first)
+        //   .sort({ createdAt: -1 });
+        return User.find(query)
+          .skip(args.offset)
+          .limit(args.first)
+          .sort({ createdAt: -1 });
       },
     },
     user: {

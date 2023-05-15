@@ -97,10 +97,16 @@ const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
         </Typography>
         <Divider />
         <Box className="buttons-container">
-          <Button onClick={handleClose} variant="contained" color="primary">
+          <Button
+            sx={{ textTransform: "none" }}
+            onClick={handleClose}
+            variant="contained"
+            color="primary"
+          >
             <Typography>Cancel</Typography>
           </Button>
           <Button
+            sx={{ textTransform: "none" }}
             onClick={() => handleDeleteUser(id)}
             variant="contained"
             color="error"
