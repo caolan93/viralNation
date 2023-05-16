@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gql } from "@apollo/client";
 
 // Material UI Components
@@ -33,31 +33,44 @@ const GridPage = () => {
   const [filter, setFilter] = useState("");
   const [nextPage, setNextPage] = useState(1);
   const [prevPage, setPrevPage] = useState(1);
-  const [first, setFirst] = useState(10);
+  const [first, setFirst] = useState(8);
   const [offset, setOffset] = useState(0);
 
   const [dropdown, setDropdown] = useState<number | null>(null);
 
-  //Paginated Code
-  // const handlePrevResults = (offset, first) => {
-  //   if (first === 10) {
-  //     return;
-  //   }
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
 
-  //   let newOffset = offset - 10;
-  //   let newFirst = first - 10;
+    // Document height (height of the entire page)
+    const documentHeight = document.documentElement.scrollHeight;
 
-  //   setFirst(newFirst);
-  //   setOffset(newOffset);
-  // };
+    // Current scroll position
+    const scrollPosition =
+      window.scrollY ||
+      window.pageYOffset ||
+      document.documentElement.scrollTop;
 
-  // const handleNextResults = (offset, first) => {
-  //   let newOffset = offset + 10;
-  //   let newFirst = first + 10;
+    // Check if scroll is at the bottom
+    if (scrollPosition + windowHeight >= documentHeight) {
+      setFirst(first + 8);
+    }
+  };
 
-  //   setFirst(newFirst);
-  //   setOffset(newOffset);
-  // };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleNextResults = (offset, first) => {
+    let newOffset = offset + 10;
+    let newFirst = first + 10;
+
+    setFirst(newFirst);
+    setOffset(newOffset);
+  };
 
   const handleDropdown = (cardIndex: number) => {
     if (dropdown === cardIndex) {
@@ -80,7 +93,7 @@ const GridPage = () => {
 
   const GET_USERS = gql`
     query {
-      users(filter: "${filter}") {
+      users(filter: "${filter}", first: ${first}) {
         id
         first_name
         last_name
@@ -316,20 +329,6 @@ const GridPage = () => {
               </Grid>
             </Grid>
           </Grid>
-          {/* <Box sx={{ display: "flex", gap: "16px", marginTop: "auto" }}>
-            <Button
-              onClick={() => handlePrevResults(offset, first)}
-              variant="contained"
-            >
-              Prev Results
-            </Button>
-            <Button
-              onClick={() => handleNextResults(offset, first)}
-              variant="contained"
-            >
-              Next Results
-            </Button>
-          </Box> */}
           <Form isOpen={isOpen} handleClose={handleClose} />
         </div>
       )}
