@@ -22,8 +22,16 @@ type Props = {
 const ModalComponent = ({ isOpen, handleClose, id }: Props) => {
   const dispatch = useDispatch();
   const mode = useSelector((state: RootState) => state?.mode.mode);
+  const filter = useSelector((state: RootState) => state?.form.filterValue);
   const [deleteUser] = useMutation(DELETE_USER, {
-    refetchQueries: [{ query: GET_USERS }],
+    refetchQueries: [
+      {
+        query: GET_USERS,
+        variables: {
+          filter,
+        },
+      },
+    ],
   });
 
   const handleDeleteUser = async (id: string) => {

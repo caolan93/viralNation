@@ -40,7 +40,6 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       args: {
         first: { type: GraphQLInt },
-        offset: { type: GraphQLInt },
         filter: { type: GraphQLString },
       },
       resolve: async (parent, args) => {
@@ -53,13 +52,8 @@ const RootQuery = new GraphQLObjectType({
           ],
         };
 
-        // return User.find(query)
-        //   .skip(args.offset)
-        //   .limit(args.first)
-        //   .sort({ createdAt: -1 });
         return await User.find(query)
-          .skip(args.offset)
-          .limit(args.first)
+          .limit(args.first || 8)
           .sort({ createdAt: -1 });
       },
     },

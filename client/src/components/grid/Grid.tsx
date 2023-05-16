@@ -24,17 +24,17 @@ import Form from "../Form";
 // Styling
 import "../../styles/components/grid/grid.scss";
 import { ClipLoader } from "react-spinners";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { updateFilterValue } from "../../redux/form";
+// import { GET_USERS } from "../../graphQL/queries";
 
 const GridPage = () => {
+  const dispatch = useDispatch();
   const mode = useSelector((state: RootState) => state?.mode?.mode);
+  const filter = useSelector((state: RootState) => state?.form?.filterValue);
+
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
-  const [nextPage, setNextPage] = useState(1);
-  const [prevPage, setPrevPage] = useState(1);
-  const [first, setFirst] = useState(8);
-  const [offset, setOffset] = useState(0);
 
   const [dropdown, setDropdown] = useState<number | null>(null);
 
@@ -52,7 +52,6 @@ const GridPage = () => {
 
     // Check if scroll is at the bottom
     if (scrollPosition + windowHeight >= documentHeight) {
-      setFirst(first + 8);
     }
   };
 
@@ -63,14 +62,6 @@ const GridPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleNextResults = (offset, first) => {
-    let newOffset = offset + 10;
-    let newFirst = first + 10;
-
-    setFirst(newFirst);
-    setOffset(newOffset);
-  };
 
   const handleDropdown = (cardIndex: number) => {
     if (dropdown === cardIndex) {
@@ -87,13 +78,13 @@ const GridPage = () => {
     setSearch(value);
 
     setTimeout(() => {
-      setFilter(value);
+      dispatch(updateFilterValue(value));
     }, 500);
   };
 
   const GET_USERS = gql`
     query {
-      users(filter: "${filter}", first: ${first}) {
+      users(filter: "${filter}") {
         id
         first_name
         last_name

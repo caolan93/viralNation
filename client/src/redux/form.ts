@@ -10,6 +10,7 @@ const initialState = {
     description: "",
     is_verified: false,
   },
+  filterValue: "",
 };
 
 export const formSlice = createSlice({
@@ -30,9 +31,13 @@ export const formSlice = createSlice({
     setFormValues: (state, action) => {
       state.formValues = action.payload;
     },
+    updateFilterValue: (state, action) => {
+      state.filterValue = action.payload;
+    },
   },
 });
 
-export const { clearForm, setFormValues } = formSlice.actions;
+export const { clearForm, setFormValues, updateFilterValue } =
+  formSlice.actions;
 
 export default formSlice.reducer;
