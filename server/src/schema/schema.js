@@ -43,7 +43,7 @@ const RootQuery = new GraphQLObjectType({
         offset: { type: GraphQLInt },
         filter: { type: GraphQLString },
       },
-      resolve(parent, args) {
+      resolve: async (parent, args) => {
         const query = {
           $or: [
             { first_name: { $regex: args.filter, $options: "i" } },
@@ -57,7 +57,7 @@ const RootQuery = new GraphQLObjectType({
         //   .skip(args.offset)
         //   .limit(args.first)
         //   .sort({ createdAt: -1 });
-        return User.find(query)
+        return await User.find(query)
           .skip(args.offset)
           .limit(args.first)
           .sort({ createdAt: -1 });
